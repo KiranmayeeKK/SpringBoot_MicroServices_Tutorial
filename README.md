@@ -1,6 +1,4 @@
-First Commit
--------------
-This project contains the 3 individual applications that return hardcoded reply on http request.
+This project contains the 3 microservice applications that communicate with each other via REST API.
 
 Import these projects in Eclipse Java EE and add Tomcat server. Then click on run and select java application and then select the class name of main function.
 
@@ -14,5 +12,4 @@ http://localhost:8082/movies/foo
 
 http://localhost:8083/ratingsdata/foo
 
-
-whatever be the last word tey return the same hard coded output.
+These three applications are up and running
