@@ -1,4 +1,6 @@
-This folder contains the 3 individual applications that return hardcoded reply on http request.
+First Commit
+-------------
+This project contains the 3 individual applications that return hardcoded reply on http request.
 
 Import these projects in Eclipse Java EE and add Tomcat server. Then click on run and select java application and then select the class name of main function.
 
