@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import io.katkol.moviecatalogservice.models.CatalogItem;
 import io.katkol.moviecatalogservice.models.Movie;
 import io.katkol.moviecatalogservice.models.Rating;
+import io.katkol.moviecatalogservice.models.UserRating;
 
 @RestController
 @RequestMapping("/catalog")
@@ -22,27 +24,23 @@ public class MovieCatalogResource {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	@Autowired
+	private WebClient.Builder webClientBuilder;
+	
 	@RequestMapping("/{userId}")
-	public List<CatalogItem> getCatalog(@PathVariable("userId")String UserId){
-		
-		//Creating an object like this creates a new object every time the page is refreshed.
-		//To avoid this beans can be used 
-		//RestTemplate restTemplate = new RestTemplate();
-		
+	public List<CatalogItem> getCatalog(@PathVariable("userId")String userId){
 		
 		//get all rated movie IDs
-		// At this stage of application development, the list of ratings is hardcoded
-		
-		List<Rating> ratings = Arrays.asList(
-				new Rating("1234", 4),
-				new Rating("5678", 3));
+
+		UserRating ratings = restTemplate.getForObject("http://localhost:8083/ratingsdata/users/" + userId, UserRating.class);
 		
 		//For each movie ID, call movie info service and get details
 		
 		//To call the movie Info service, an API call has to be made using REST Template
-		return ratings.stream().map(rating -> {
+		return ratings.getUserRating().stream().map(rating -> {
 			Movie movie = restTemplate.getForObject("http://localhost:8082/movies/" + rating.getMovieId(), Movie.class);
-		return new CatalogItem(movie.getName(),"Test",rating.getRating());
+
+			return new CatalogItem(movie.getName(),"Test",rating.getRating());
 		}).collect(Collectors.toList());
 
 		
