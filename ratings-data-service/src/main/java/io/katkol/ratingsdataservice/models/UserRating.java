@@ -4,7 +4,7 @@ import java.util.List;
 
 public class UserRating {
 	
-	private List <Rating> userRating;
+	private List <Rating> ratings;
 
 	
 	public UserRating() {
@@ -13,15 +13,15 @@ public class UserRating {
 	
 	public UserRating(List<Rating> userRating) {
 		super();
-		this.userRating = userRating;
+		this.ratings = userRating;
 	}
 
-	public List<Rating> getUserRating() {
-		return userRating;
+	public List<Rating> getRatings() {
+		return ratings;
 	}
 
-	public void setUserRating(List<Rating> userRating) {
-		this.userRating = userRating;
+	public void setRatings(List<Rating> Ratings) {
+		this.ratings = Ratings;
 	}
 	
 
