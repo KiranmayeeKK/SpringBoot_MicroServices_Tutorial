@@ -23,7 +23,6 @@ import io.katkol.moviecatalogservice.models.UserRating;
 public class MovieCatalogResource {
 	
 	@Autowired
-	@LoadBalanced
 	private RestTemplate restTemplate;
 	
 	@RequestMapping("/{userId}")
